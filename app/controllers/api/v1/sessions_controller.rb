@@ -1,13 +1,12 @@
-class V1::SessionsController < ApplicationController
+class Api::V1::SessionsController < ApplicationController
   before_action :load_user, only: :create
 
   def create
-    if @user.valid_password?(params[:password])
-      sign_in "user", @user
+    if @user.password == params[:password]
       render json: {
         messages: "Signed In Successfully",
         is_success: true,
-        data: {user: @user}
+        data: {token: @user.authentication_token}
       }, status: :ok
     else
       render json: {
@@ -20,7 +19,7 @@ class V1::SessionsController < ApplicationController
 
   private
   def load_user
-    @user = User.find_for_database_authentication(email: params[:email])
+    @user = User.find_by(email: params[:email])
     if @user
       return @user
     else
