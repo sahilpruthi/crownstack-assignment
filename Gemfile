@@ -12,7 +12,7 @@ gem 'rails', '~> 5.1.7'
 gem 'pg'
 # gem 'sqlite3'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 gem 'bcrypt'
 gem 'jwt'
 
